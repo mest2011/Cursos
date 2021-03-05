@@ -1,0 +1,24 @@
+
+ Fundamentos de UX: Entenda a experiência de usuário
+	Aula 03-04 
+	
+		Cite pelo menos 5 problemas seus que voce gostaria de resolver? : (Desafio do professor)
+		
+			->Ter/criar uma rotina, para estudos, academia, projetos ...
+			->Disciplina para acordar cedo, fazer meus deveres
+			->Ter uma melhor desenvoltura em conversas genericas (saber conversar melhor)
+			->Ter um melhor controle sobre meus sentimentos e como expresso eles para os outros
+			->Me exercitar
+			->Conseguir um bom emprego
+			
+			
+ UX Strategy: divergindo e afunilando ideias
+	Aula 6 - bloco 2
+		Quais pontos você pensou nas questões de desejabilidade para seu projeto?
+			
+			-free
+			-App intuitivo (fácil de usar)
+			-Controle de gastos e ganhos (ajudar com gráficos e relatórios para o cliente economizar mais)
+			-+Novidades (Atualizações e novidades mais rápidas)
+			-Login com redes sociais e Google
+			-Criptografia dos dados (+ segurança)

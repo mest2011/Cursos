@@ -1,0 +1,178 @@
+header{
+	background: #BBBBBB;
+	padding: 20px 0;
+}
+
+.caixa {
+	position: relative;
+	width: 940px;
+	margin: 0 auto;
+}
+
+nav {
+	position: absolute;
+	top: 110px;
+	right: 0;
+}
+
+nav li {
+	display: inline;
+	margin: 0 0 0 15px;
+}
+
+nav a {
+	text-transform: uppercase;
+	color: #000000;
+	font-weight: bold;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+nav a:hover{
+	font-style: italic;
+	color: #ffd882;
+	font-size: 23px;
+}
+
+footer{
+	text-align: center;
+	/*background: url("bg.jpg") ;*/
+	background-color: #383838;
+	
+}
+
+.Copyright {
+	color: white;
+	font-size: 13px;
+	padding:  20px 0;
+
+}
+#banner {
+	width:100%;
+}
+
+.principal{
+	text-align: center;
+	background: #CCCCCC;
+	padding: 30px;
+}
+
+.titulo-principal {
+	padding-left: 20px;
+}
+
+.titulo-centralizado {
+	text-align: center
+}
+
+main{
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+main p {
+	text-align: center;
+}
+
+.main {
+	width: 940px;
+	margin: 0 auto;
+}
+
+.main form {
+	text-align: left;
+	margin: 40px 0;
+}
+
+form label, form legend {
+	text-align: left;
+	font-size: 20px;
+	margin: 10px 0 5px 0;
+	display: block;
+}
+
+form legend{
+	padding: 20px 0 5px 0;
+}
+
+.input-padrao {
+	margin: 15px 0 0 0; 
+	display: block;
+	padding: 10px 25px;
+	width: 50%;
+}
+
+.checkbox {
+	margin: 20px 0;
+}
+
+#missao {
+	font-size: 20px
+}
+
+main em strong {
+	color: #FF0000;
+}
+
+.itens {
+	font-style: italic
+}
+
+.beneficios {
+	width: 940px;
+	margin: 0 auto;
+	background: #FFFFFF;
+	padding: 20px;
+}
+
+.beneficios h3 {
+	font-weight: bold;
+	font-size: 37px;
+	padding-bottom: 15px;
+}
+
+main ul {
+	display: inline-block;
+	vertical-align: top;
+	width: 20%;
+	margin-top: 80px;
+	margin-right: 15%;
+}
+
+.imagembeneficios {
+	width: 50%;
+
+}
+
+.enviar{
+	width: 40%;
+	padding: 15px 0;
+	background: orange;
+	color: white;
+	font-weight: bold;
+	font-size: 25px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.2s all;
+}
+
+.enviar:hover{
+	background: darkorange;
+	transition: 0.2s all;
+	transform: scale(1.2);
+}
+
+thead{
+	background-color: gray;
+	color: white;
+	font-weight: bold;
+}
+
+tbody, tfoot{
+	border: 1px solid #000000;
+}
+
+th,td {
+	padding: 8px 15px;
+}

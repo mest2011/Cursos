@@ -1,0 +1,59 @@
+Tags:
+    Declarando um arquivo html:
+        <!DOCTYPE html>
+        <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title></title>
+            </head>
+            <body>
+            </body>
+        </html>
+
+
+Regras:
+
+
+
+Links:
+    Repositorios:
+        github.com/gustavoguanabara -> repositorio do curso
+        gustavoguanabara.github.io -> hospedagem do projeto do curso
+
+
+
+Anotações:
+    HTML: 
+        liguagem de conteudo (texto, imagem, videos, tabelas)
+    CSS:
+        Foco em design (cores, sombras, tamanhos, posicionamento)
+    Javascript:
+        Interações (menus, animações, popups, validações)
+
+
+
+
+
+
+
+
+
+Outras:
+    Referencias bibliograficas:
+        Video de como a internet funciona:
+            https://www.youtube.com/watch?v=TNQsmPf24go
+
+        Apostilas curso em video:
+            https://github.com/gustavoguanabara/html-css/tree/master/aulas-pdf
+
+        MDN Mozilla Developer Network:
+            https://developer.mozilla.org/pt-BR/docs/Web/Reference
+        W3C Standards:
+            https://www.w3.org/standards/webdesign/
+        WhatWG Living Standard:
+            https://html.spec.whatwg.org/
+        W3Schools:
+            https://www.w3schools.com/
+
+ 
