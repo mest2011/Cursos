@@ -26,8 +26,8 @@ Cadastrar Série
             <input type="number" class="form-control" name="qtd_temporadas" id="qtd_temporadas">
         </div>
         <div class="col col-2">
-            <label for="ep_por_temporda">Ep. por temporada</label>
-            <input type="number" class="form-control" name="ep_por_temporda" id="ep_por_temporda">
+            <label for="ep_por_temporada">Ep. por temporada</label>
+            <input type="number" class="form-control" name="ep_por_temporada" id="ep_por_temporda">
         </div>
     </div>
 
