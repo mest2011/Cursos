@@ -32,10 +32,10 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie)
     {
         $serie = $criadorDeSerie->criarSerie(
-                $request->nome,
-                (int) $request->qtd_temporadas,
-                (int) $request->ep_por_temporada
-            );
+            $request->nome,
+            (int) $request->qtd_temporadas,
+            (int) $request->ep_por_temporada
+        );
 
         $request->session()
             ->flash(
@@ -57,5 +57,13 @@ class SeriesController extends Controller
             );
 
         return redirect()->route('listar_series');
+    }
+
+    public function editaNome($id, Request $request)
+    {
+        $novoNome = $request->nome;
+        $serie = Serie::find($id);
+        $serie->nome = $novoNome;
+        $serie->save();
     }
 }
