@@ -14,4 +14,8 @@ Como publicar uma aplicação em laravel
     PS.:
         "Mas além disso tudo, gostaria de deixar uma coisa clara aqui: Você não deve deixar seu arquivo .env em produção, a menos que não haja alternativa. Em hospedagens compartilhadas, por exemplo, normalmente não é possível gerenciar variáveis de ambiente. Mas caso você tenha controle sobre as variáveis de ambiente da sua aplicação, não faça uso do arquivo .env. Defina todas as variáveis necessárias diretamente desta forma, para que nenhuma informação sensível esteja armazenada em texto puro.
 
-        O terceiro parágrafo deste tópico da documentação do Laravel deixa isso claro."
+        \O terceiro parágrafo deste tópico da documentação do Laravel deixa isso claro."
+
+Como rodar um servidor sem "Artisan serve"
+    Comando:
+        php -S localhost:8000 -t api-series/public
