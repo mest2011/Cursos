@@ -11,6 +11,17 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 justify-content-between">
+        <a href="{{route('listar_series')}}" class="navbar navbar-expand-lg">Home</a>
+
+        @auth
+        <a href="/sair" class="text-danger">Sair</a>
+        @endauth
+
+        @guest
+        <a href="/entrar">Entrar</a>
+        @endguest
+    </nav>
     <div class="container">
         <div class="jumbotron">
             <h1>@yield('titulo')</h1>

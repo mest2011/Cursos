@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct() //Faz a verificação de usuario logado em todas as rotas referente a series, caso o usuario não esteja logado redireciona para tela de login do laravel
+    // {
+    //     $this->middleware('auth');
+    // }
 
     function index(Request $request)
     {
