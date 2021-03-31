@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     function index(Request $request)
     {
