@@ -1,0 +1,17 @@
+Como publicar uma aplicação em laravel 
+    Cuidados
+        Dentro do arquivo ".env", trocar ->
+        "APP_ENV=local" para "APP_ENV=prod",
+        "APP_DEBUG=true" para "APP_DEBUG=false",
+        Altera chave "APP_KEY=..." atraves do comando no terminal "php artisan key:generate" --show
+    Subir aplicação via SSH, atenção: não subir a pasta vendor (por questão dela ser excessivamente grande e conter arquivor que serão instalador de composer)
+        O ideal é rodar o git pull no servidor e em seguida rodar o composer
+    Rodar o composer intall no servidor via SSH
+
+    Caso ainda restem duvidas, segue documentação do laravel para consulta de como publicar a aplicação 
+        https://laravel.com/docs/5.8/deployment
+    
+    PS.:
+        "Mas além disso tudo, gostaria de deixar uma coisa clara aqui: Você não deve deixar seu arquivo .env em produção, a menos que não haja alternativa. Em hospedagens compartilhadas, por exemplo, normalmente não é possível gerenciar variáveis de ambiente. Mas caso você tenha controle sobre as variáveis de ambiente da sua aplicação, não faça uso do arquivo .env. Defina todas as variáveis necessárias diretamente desta forma, para que nenhuma informação sensível esteja armazenada em texto puro.
+
+        O terceiro parágrafo deste tópico da documentação do Laravel deixa isso claro."
