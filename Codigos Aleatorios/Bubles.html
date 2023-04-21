@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        background: #102131;
+        transition-property: background-color;
+        transition-duration: 3s;
+      }
+
+      #container {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        margin: auto;
+        transform: rotate(0deg);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    </style>
+  </head>
+  <body onclick="openFullscreen()" onload="reset()">
+    <canvas id="container" width="600" height="600"></canvas>
+    <script>
+      const body = document.getElementsByTagName("body")[0];
+      var width = body.clientWidth;
+      var height = body.clientHeight;
+      var isFullScreen = false;
+      var brilho = 255;
+      function openFullscreen() {
+        var elem = body;
+        if (!isFullScreen) {
+          isFullScreen = true;
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.webkitRequestFullscreen) {
+            /* Safari */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) {
+            /* IE11 */
+            elem.msRequestFullscreen();
+          }
+        } else {
+          isFullScreen = false;
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+        reset();
+      }
+
+      function reset() {
+        const canvas = document.getElementById("container");
+        const context = canvas.getContext("2d");
+
+        // resize the canvas to fill browser window dynamically
+        window.addEventListener("resize", resizeCanvas, false);
+
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+
+          /**
+           * Your drawings need to be inside this function otherwise they will be reset when
+           * you resize the browser window and the canvas goes will be cleared.
+           */
+          drawStuff();
+        }
+
+        resizeCanvas();
+
+        function drawStuff() {
+          // do your drawing stuff here
+        }
+      }
+
+      var points = [],
+        velocity2 = 85, // velocity squared
+        canvas = document.getElementById("container"),
+        context = canvas.getContext("2d"),
+        radius = 5,
+        boundaryX = width,
+        boundaryY = height,
+        numberOfPoints = 200;
+
+      var primaryColor = [];
+      var secondaryColor = [];
+      var pointSizes = [];
+
+      init();
+
+      function init() {
+        // create points
+        for (var i = 0; i < numberOfPoints; i++) {
+          createPoint();
+        }
+
+        for (let x = 0; x < numberOfPoints; x++) {
+          primaryColor.push(
+            gerarCorAleatoria(
+              true,
+              true,
+              true,
+              true,
+              "",
+              Math.floor(Math.random() * 255)
+            )
+          );
+          secondaryColor.push(
+            gerarCorAleatoria(
+              true,
+              true,
+              true,
+              true,
+              "",
+              Math.floor(Math.random() * 255)
+            )
+          );
+          pointSizes.push(Math.floor(Math.random() * 80) + radius);
+        }
+        // create connections
+        for (var i = 0, l = points.length; i < l; i++) {
+          var point = points[i];
+          if (i == 0) {
+            points[i].buddy = points[points.length - 1];
+          } else {
+            points[i].buddy = points[i - 1];
+          }
+        }
+
+        // animate
+        animate();
+      }
+
+      function createPoint() {
+        var point = {},
+          vx2,
+          vy2;
+        point.x = Math.random() * width;
+        point.y = Math.random() * height;
+        // random vx
+        point.vx = (Math.floor(Math.random()) * 2 - 1) * Math.random();
+        vx2 = Math.pow(point.vx, 2);
+        // vy^2 = velocity^2 - vx^2
+        vy2 = velocity2 - vx2;
+        point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+        points.push(point);
+      }
+
+      function resetVelocity(point, axis, dir, velocity) {
+        var vx, vy;
+        if (axis == "x") {
+          point.vx = dir * Math.random();
+          vx2 = Math.pow(point.vx, 2);
+          // vy^2 = velocity^2 - vx^2
+          vy2 = velocity2 - velocity - vx2;
+          point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
+        } else {
+          point.vy = dir * Math.random();
+          vy2 = Math.pow(point.vy, 2);
+          // vy^2 = velocity^2 - vx^2
+          vx2 = velocity2 - velocity - vy2;
+          point.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
+        }
+      }
+
+      function gerarCorAleatoria(
+        tonsQuentes = true,
+        tonsFrios = true,
+        tonsClaros = true,
+        tonsEscuros = true,
+        paleta = null,
+        escurecer = 255
+      ) {
+        let r, g, b;
+
+        // definir os valores mínimos e máximos para cada canal de cor
+        const rMin = tonsEscuros ? 0 : 128;
+        const rMax = tonsClaros ? 255 : 128;
+        const gMin = tonsFrios ? 0 : 128;
+        const gMax = tonsQuentes ? 255 : 128;
+        const bMin = tonsFrios ? 128 : 0;
+        const bMax = tonsQuentes ? 255 : 128;
+
+        // gerar valores aleatórios para cada canal de cor de acordo com a paleta escolhida (se houver)
+        switch (paleta) {
+          case "azul":
+            r = rMin;
+            g = gMin;
+            b = Math.floor(Math.random() * (bMax - bMin + 1)) + bMin;
+            break;
+          case "verde":
+            r = rMin;
+            g = Math.floor(Math.random() * (gMax - gMin + 1)) + gMin;
+            b = bMin;
+            break;
+          case "vermelho":
+            r = Math.floor(Math.random() * (rMax - rMin + 1)) + rMin;
+            g = gMin;
+            b = bMin;
+            break;
+          default:
+            r = Math.floor(Math.random() * (rMax - rMin + 1)) + rMin;
+            g = Math.floor(Math.random() * (gMax - gMin + 1)) + gMin;
+            b = Math.floor(Math.random() * (bMax - bMin + 1)) + bMin;
+            break;
+        }
+
+        // retornar a cor no formato "#000000"
+        return `#${verifyLen(r.toString(16))}${verifyLen(
+          g.toString(16)
+        )}${verifyLen(b.toString(16))}${verifyLen(escurecer.toString(16))}`;
+      }
+
+      function verifyLen(value) {
+        return value.length < 2 ? "0" + value : value;
+      }
+
+      //   function drawCircle(x, y, position) {
+      //     // criar um gradiente radial
+      //     const gradient = context.createRadialGradient(
+      //       x,
+      //       y,
+      //       0,
+      //       x,
+      //       y,
+      //       pointSizes[position]
+      //     );
+      //     gradient.addColorStop(0, primaryColor[position]); // cor no centro do gradiente
+      //     gradient.addColorStop(1, secondaryColor[position]); // cor na borda do gradiente
+      //     context.beginPath();
+      //     context.arc(x, y, pointSizes[position], 0, 2 * Math.PI, false);
+      //     context.fillStyle = gradient;
+      //     context.fill();
+      //   }
+
+      function drawCircle(x, y, position) {
+        // criar um gradiente radial
+        const gradient = context.createRadialGradient(
+          x - (x / width / 3) * pointSizes[position],
+          y - (y / height / 3) * pointSizes[position],
+          pointSizes[position] * 0.01,
+          x,
+          y,
+          pointSizes[position]
+        );
+        gradient.addColorStop(0, `#eeeeee`); // cor para o efeito de iluminação
+        gradient.addColorStop(0.6, primaryColor[position]); // cor entre o centro e a borda do gradiente
+        gradient.addColorStop(1, secondaryColor[position]); // cor na borda do gradiente
+
+        // desenhar o círculo com o gradiente
+        context.beginPath();
+        context.arc(x, y, pointSizes[position], 0, 2 * Math.PI, false);
+        context.fillStyle = gradient;
+        context.fill();
+      }
+
+      function drawLine(x1, y1, x2, y2, position) {
+        return;
+        // criar um gradiente linear
+        const gradient = context.createLinearGradient(x1, y1, x2, y2);
+        gradient.addColorStop(0, primaryColor[position]); // cor no começo do gradiente
+        gradient.addColorStop(1, secondaryColor[position]); // cor no fim do gradiente
+
+        // desenhar a linha com o gradiente como estilo de traçado
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.strokeStyle = gradient;
+        context.stroke();
+      }
+
+      function draw() {
+        for (var i = 0, l = points.length; i < l; i++) {
+          // change circle position
+          var point = points[i];
+          point.x += point.vx / 2;
+          point.y += point.vy / 2;
+
+          drawCircle(point.x, point.y, i);
+          // lines
+          drawLine(point.x, point.y, point.buddy.x, point.buddy.y, i);
+          // check for edge
+          if (point.x < 0 + radius) {
+            resetVelocity(point, "x", 1, pointSizes[i]);
+            changeColor(i);
+          } else if (point.x > width - radius) {
+            resetVelocity(point, "x", -1, pointSizes[i]);
+            changeColor(i);
+          } else if (point.y < 0 + radius) {
+            resetVelocity(point, "y", 1, pointSizes[i]);
+            changeColor(i);
+          } else if (point.y > height - radius) {
+            resetVelocity(point, "y", -1, pointSizes[i]);
+            changeColor(i);
+          }
+        }
+      }
+
+      function changeColor(position) {
+        primaryColor[position] = gerarCorAleatoria(
+          true,
+          true,
+          true,
+          true,
+          "azul",
+          Math.floor(Math.random() * 255)
+        );
+        secondaryColor[position] = gerarCorAleatoria(
+          true,
+          true,
+          true,
+          true,
+          "azul",
+          Math.floor(Math.random() * 255)
+        );
+      }
+
+      setInterval(() => {
+        body.style.background = gerarCorAleatoria(
+          true,
+          true,
+          true,
+          true,
+          "azul",
+          150
+        );
+      }, 5000);
+
+      setInterval(() => {
+        width = body.clientWidth;
+        height = body.clientHeight;
+        fade();
+      }, 500);
+
+      setInterval(() => {
+        fade();
+      }, 10);
+
+      let up = false;
+      let down = true;
+
+      function fade() {
+        if (brilho == 255) {
+          up = false;
+          down = true;
+        }
+        if (up) brilho++;
+        if (down) brilho--;
+        if (brilho == -255) {
+          up = true;
+          down = false;
+        }
+      }
+
+      function animate() {
+        context.clearRect(0, 0, width, height);
+        draw();
+        requestAnimationFrame(animate);
+      }
+    </script>
+  </body>
+</html>
